@@ -1,0 +1,34 @@
+:root {
+  --pink: #FFB6C1;
+  --black: #000000;
+  --accent: #FF8FA3;
+}
+
+a {
+  color: var(--pink);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+.section {
+  padding: 5rem 1rem;
+  text-align: center;
+}
+
+.btn-main {
+  background-color: var(--pink);
+  color: var(--black);
+  padding: 0.8rem 1.8rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-main:hover {
+  background-color: var(--accent);
+  transform: scale(1.05);
+}
