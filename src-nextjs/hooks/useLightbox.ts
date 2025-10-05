@@ -10,13 +10,13 @@ export const useLightbox = () => {
     if (lightbox && lightboxImage && lightboxClose) {
       // Add click handlers to all lightbox triggers
       lightboxTriggers.forEach(trigger => {
-        trigger.addEventListener('click', function() {
-          const img = this.querySelector('img');
+        trigger.addEventListener('click', function(this: HTMLElement) {
+          const img = this.querySelector('img') as HTMLImageElement;
           if (img) {
             // Use higher resolution image for lightbox
             const highResUrl = img.src.replace('w=400&h=300', 'w=1200&h=800');
-            lightboxImage.src = highResUrl;
-            lightboxImage.alt = img.alt;
+            (lightboxImage as HTMLImageElement).src = highResUrl;
+            (lightboxImage as HTMLImageElement).alt = img.alt;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
           }
@@ -27,7 +27,7 @@ export const useLightbox = () => {
       lightboxClose.addEventListener('click', closeLightbox);
       
       // Close lightbox when clicking outside the image
-      lightbox.addEventListener('click', function(e) {
+      lightbox.addEventListener('click', function(this: HTMLElement, e: Event) {
         if (e.target === lightbox) {
           closeLightbox();
         }

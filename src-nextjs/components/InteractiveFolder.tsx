@@ -19,7 +19,7 @@ const InteractiveFolder: React.FC<InteractiveFolderProps> = ({
   folderText = ''
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const folderRef = useRef<HTMLDivElement>(null);
+  const folderRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
   const [isOpen, setIsOpen] = React.useState(false);
   const [paperOffsets, setPaperOffsets] = React.useState([
     { x: 0, y: 0 },

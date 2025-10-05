@@ -8,11 +8,11 @@ export const useContactForm = () => {
       // Add real-time validation
       const inputs = contactForm.querySelectorAll('input, select, textarea');
       inputs.forEach(input => {
-        input.addEventListener('blur', function() {
+        input.addEventListener('blur', function(this: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
           validateField(this);
         });
         
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function(this: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
           clearFieldValidation(this);
         });
       });
@@ -21,13 +21,13 @@ export const useContactForm = () => {
         e.preventDefault();
         
         // Get form data
-        const formData = new FormData(this);
+        const formData = new FormData(contactForm as HTMLFormElement);
         const formObject: Record<string, string> = {};
         
         // Convert FormData to object
-        for (let [key, value] of formData.entries()) {
+        formData.forEach((value, key) => {
           formObject[key] = value as string;
-        }
+        });
         
         // Validate all fields
         let isValid = true;
@@ -50,7 +50,7 @@ export const useContactForm = () => {
         // Simulate form submission (replace with actual endpoint)
         setTimeout(() => {
           showFormMessage('Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
-          contactForm.reset();
+          (contactForm as HTMLFormElement).reset();
           
           // Clear all validation states
           inputs.forEach(input => {
